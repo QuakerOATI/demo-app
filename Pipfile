@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+dependency-injector = "*"
+pydantic = "*"
+flask = "*"
+gin-config = "*"
+scikit-learn = "*"
+pymongo = "*"
+kafka = "*"
+environs = "*"
+
+[dev-packages]
+tox = "*"
+pytest = "*"
+pre-commit = "*"
+black = "*"
+isort = "*"
+ipython = "*"
+sphinx = "*"
+line-profiler = "*"
+
+[requires]
+python_version = "3.11"
