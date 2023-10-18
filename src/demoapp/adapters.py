@@ -1,3 +1,4 @@
+import logging
 import pymongo
 from collections.abc import Iterator
 from typing import Callable, List
@@ -7,8 +8,14 @@ from contextlib import AbstractContextManager, AbstractAsyncContextManager
 from .entities import Passenger
 
 
-class PassengerAdapter(ABC):
+class Adapter(ABC):
+    def __init__(self):
+        self.logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
+
+
+class PassengerAdapter(Adapter):
     def __init__(self, passenger_factory: Callable[..., Passenger]) -> None:
+        super().__init__()
         self._factory = passenger_factory
 
     @abstractmethod
@@ -53,6 +60,7 @@ class MongoPassengerAdapter(PassengerAdapter, AbstractContextManager):
         return self
 
     def __exit__(self, exc_type, exc_value, exc_tb):
+        self.logger.info("Closing MongoDB client %s", self._client)
         self._client.close()
 
     def get_all(self) -> Iterator[Passenger]:
@@ -61,10 +69,13 @@ class MongoPassengerAdapter(PassengerAdapter, AbstractContextManager):
 
     def test_connection(self) -> bool:
         """Return True if attempt to ping the Mongo client is successful."""
+        self.logger.debug("Testing MongoDB client %s..." % self._client)
         try:
             self._client.get_default_database().command("ping")
+            self.logger.debug("Connection succeeded")
             return True
         except pymongo.errors.ConnectionFailure:
+            self.logger.debug("Connection failed")
             return False
 
 
