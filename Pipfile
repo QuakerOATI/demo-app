@@ -26,6 +26,10 @@ sphinx = "*"
 line-profiler = "*"
 pytest-cov = "*"
 aiokafka = "*"
+git-cliff = "*"
+commitizen = "*"
+docformatter = "*"
+ruff = "*"
 
 [requires]
 python_version = "3.11"
