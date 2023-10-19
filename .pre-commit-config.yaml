@@ -34,17 +34,61 @@ repos:
 #       --remove-all-unused-imports,
 #       --remove-unused-variables,
 #     ]
+- repo: https://github.com/compilerla/conventional-pre-commit
+  rev: latest
+  hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [build chore ci docs feat fix perf refactor revert style test]
 
 - repo: https://github.com/PyCQA/isort
   rev: 5.11.5
   hooks:
   - id: isort
+  - args: [--settings-file, ./pyproject.toml]
 
 - repo: https://github.com/psf/black
   rev: stable
   hooks:
   - id: black
     language_version: python3
+
+- repo: https://github.com/PyCQA/docformatter
+  rev: latest
+  hooks:
+  - id: docformatter
+    additional_dependencies: [tomli]
+    args: [--in-place, --config, ./pyproject.toml]
+
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.1.0
+  hooks:
+  - id: ruff
+
+- repo: https://github.com/pycqa/pydocstyle
+  rev: 6.3.0
+  hooks:
+  - id: pydocstyle
+    additional_dependencies: [toml]
+    args: [--config, ./pyproject.toml]
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.3.0
+  hooks:
+  - id: mypy
+    additional_dependencies: [types-python-dateutil]
+    args: [--config-file, ./pyproject.toml]
+- repo: https://github.com/myint/eradicate
+  rev: '2.2.0'
+  hooks:
+  - id: eradicate
+    args: []
+- repo: https://github.com/rstcheck/rstcheck
+  rev: 'v6.1.2'
+  hooks:
+  - id: rstcheck
+    additional_dependencies: [tomli]
+    args: [-r, --config, ./pyproject.toml]
 
 ## If like to embrace black styles even in the docs:
 # - repo: https://github.com/asottile/blacken-docs
