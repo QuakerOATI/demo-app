@@ -50,7 +50,8 @@ def parse_args(args):
 
 @inject
 def main(passengers: PassengerAdapter = Provide[Container.passenger_store]) -> None:
-    print(list(passengers.get_all()))
+    with passengers as repository:
+        print(list(repository.get_all()))
 
 
 if __name__ == "__main__":
