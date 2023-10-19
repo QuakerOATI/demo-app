@@ -13,6 +13,7 @@ pymongo = "*"
 kafka = "*"
 environs = "*"
 uvloop = "*"
+demoapp = {path = "."}
 
 [dev-packages]
 tox = "*"
@@ -24,6 +25,7 @@ ipython = "*"
 sphinx = "*"
 line-profiler = "*"
 pytest-cov = "*"
+aiokafka = "*"
 
 [requires]
 python_version = "3.11"
