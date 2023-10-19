@@ -13,7 +13,7 @@ pymongo = "*"
 kafka = "*"
 environs = "*"
 uvloop = "*"
-demoapp = {path = "."}
+demoapp = {file = ".", editable = true}
 
 [dev-packages]
 tox = "*"

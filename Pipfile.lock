@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c74cff2bc016c0f894b20f90d99ee5e1469b94efe5a881b4170628ae9e2aa44d"
+            "sha256": "b135f2d1cfd71cbd75975ea75e298dfc16038d5cd40bf233e8a694c6219ff687"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -41,8 +41,8 @@
             "version": "==8.1.7"
         },
         "demoapp": {
-            "path": ".",
-            "version": "==0.0.post1.dev9+g63b77ea.d20231019"
+            "editable": true,
+            "file": "."
         },
         "dependency-injector": {
             "hashes": [
@@ -693,6 +693,7 @@
                 "sha256:ff318d29ecbeea8c58d69c91c24d48d7ed4a8d3e829b607e670d118a9a35d5ba"
             ],
             "index": "pypi",
+            "markers": "python_version >= '3.8'",
             "version": "==0.8.1"
         },
         "alabaster": {
