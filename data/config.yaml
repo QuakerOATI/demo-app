@@ -1,0 +1,4 @@
+mongo:
+  uri: mongodb://demoUser:1234@127.0.0.1:27017/demo-app?directConnection=true&appName=DemoApp
+  auth_db: demo-app
+  collection: Passengers
