@@ -5,7 +5,7 @@ from typing import Callable, List
 from abc import ABC, abstractmethod
 from contextlib import AbstractContextManager, AbstractAsyncContextManager
 
-from .entities import Passenger
+from entities import Passenger
 
 
 class Adapter(ABC):
@@ -32,6 +32,9 @@ class MongoPassengerAdapter(PassengerAdapter, AbstractContextManager):
     instance of this class should be created for every client process.  See
     `the PyMogo documentation <https://pymongo.readthedocs.io/en/stable/faq.html#multiprocessing>`_.
     """
+
+    # TODO: Replace with a Mongo aggregation pipeline
+    projection = {"_id": False, "id": False, "class": False, "parch": False}
 
     def __init__(
         self,
@@ -65,7 +68,10 @@ class MongoPassengerAdapter(PassengerAdapter, AbstractContextManager):
 
     def get_all(self) -> Iterator[Passenger]:
         """Generator of all Passenger documents in the configured collection."""
-        yield from map(lambda record: self._factory(**record), self._collection.find())
+        yield from map(
+            lambda record: self._factory(**record),
+            self._collection.find(projection=self.projection),
+        )
 
     def test_connection(self) -> bool:
         """Return True if attempt to ping the Mongo client is successful."""

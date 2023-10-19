@@ -6,6 +6,7 @@ from dataclasses import dataclass
 class Passenger:
     name: str
     age: Optional[int]
+    sex: str
     survived: bool
     numSiblings: Optional[int]
     ticket: str

@@ -1,16 +1,17 @@
 from dependency_injector import containers, providers
-from . import entities
-from .adapters import MongoPassengerAdapter
-from pathlib import Path
+import entities
+from adapters import MongoPassengerAdapter
+from demoapp import PROJECT_ROOT, CONFIG_ROOT
 
 
 class Container(containers.DeclarativeContainer):
     """Main app container class."""
 
-    PROJECT_ROOT = providers.Dependency(Path)
-    CONFIG_ROOT = providers.Dependency(Path)
     conf = providers.Configuration(
-        yaml_files=[p.joinpath("settings.yaml") for p in (PROJECT_ROOT, CONFIG_ROOT)]
+        yaml_files=[
+            p.joinpath("config.yaml")
+            for p in (PROJECT_ROOT.joinpath("data"), CONFIG_ROOT)
+        ]
     )
     passenger = providers.Factory(entities.Passenger)
     passenger_store = providers.Factory(

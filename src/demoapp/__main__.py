@@ -1,7 +1,6 @@
 import logging
 from argparse import ArgumentParser
 from dependency_injector.wiring import Provide, inject
-from pathlib import Path
 from demoapp import __version__
 
 __author__ = "Michael Haynes"
@@ -9,8 +8,8 @@ __copyright__ = "Michael Haynes"
 __license__ = "MIT"
 
 
-from .container import Container
-from .adapters import PassengerAdapter
+from container import Container
+from adapters import PassengerAdapter
 
 
 def parse_args(args):
@@ -51,14 +50,11 @@ def parse_args(args):
 
 @inject
 def main(passengers: PassengerAdapter = Provide[Container.passenger_store]) -> None:
-    print(passengers.get_all())
+    print(list(passengers.get_all()))
 
 
 if __name__ == "__main__":
     # BUGGY
-    container = Container(
-        PROJECT_ROOT=Path(__file__).parent.parent.parent,
-        CONFIG_ROOT=Path.home().joinpath(".config", "demo-app"),
-    )
+    container = Container()
     container.wire(modules=[__name__])
     main()
