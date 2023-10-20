@@ -30,6 +30,7 @@ git-cliff = "*"
 commitizen = "*"
 docformatter = "*"
 ruff = "*"
+mongomock = "*"
 
 [requires]
 python_version = "3.11"
