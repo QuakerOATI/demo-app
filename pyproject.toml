@@ -1,5 +1,6 @@
 [build-system]
 # AVOID CHANGING REQUIRES: IT WILL BE UPDATED BY PYSCAFFOLD!
+# TODO: Try using PBR build-backend https://docs.openstack.org/pbr/latest/user/using.html
 requires = ["setuptools>=46.1.0", "setuptools_scm[toml]>=5"]
 build-backend = "setuptools.build_meta"
 
